@@ -43,7 +43,7 @@ let profiledRequest = (...args) => {
     .catch(e => {
       errors.push(e);
       if (LOGGING) {
-        console.log(ERROR, e);
+        console.log(e);
       }
     });
 };
