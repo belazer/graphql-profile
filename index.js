@@ -68,7 +68,8 @@ async function main() {
     let msg = `Max: ${max}ms
 Mean: ${times.reduce((acc, v) => acc + v, 0) / times.length}ms
 Min ${min}ms
-Errors ${errors.length}/${PARALLEL * ITERATIONS}`;
+Errors ${errors.length}/${PARALLEL * ITERATIONS}
+Example Error: ${errors[0]}`;
     console.log(msg);
   } catch (err) {
     console.log(`Caught an error while profiling: ${err} ${err.stack}`);
