@@ -1,21 +1,12 @@
 import { GraphQLClient } from 'graphql-request';
-let config = process.argv[2]
-if(!config){
+let config = process.argv[2];
+if (!config) {
   console.log(`pass a relative path to a config file`);
-  process.exit(0)
+  process.exit(0);
 }
 console.log(`Welcome to a fun profiling! Config(${config})`);
 
-const {
-  QUERY,
-  API,
-  TOKEN,
-  ITERATIONS,
-  PARALLEL,
-  LOGGING,
-} = require(config)
-
-
+const { QUERY, API, TOKEN, ITERATIONS, PARALLEL, LOGGING } = require(config);
 
 let max = Number.MIN_SAFE_INTEGER;
 let min = Number.MAX_SAFE_INTEGER;
@@ -35,7 +26,10 @@ let profiledRequest = (...args) => {
       let end = new Date();
       let duration = end.getTime() - start.getTime();
       if (LOGGING) {
-      console.log(`${start.toISOString()}, ${end.toISOString()}, ${end.getTime() - start.getTime()}`);
+        console.log(
+          `${start.toISOString()}, ${end.toISOString()}, ${end.getTime() -
+            start.getTime()}`
+        );
       }
       if (duration < min) {
         min = duration;
@@ -49,12 +43,10 @@ let profiledRequest = (...args) => {
     .catch(e => {
       errors.push(e);
       if (LOGGING) {
-      console.log(ERROR, e);
+        console.log(ERROR, e);
       }
     });
 };
-
-
 
 console.log(`Running with query: ${QUERY}`);
 console.log(`Profiling: ${API}`);
