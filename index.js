@@ -12,6 +12,7 @@ const {
   TOKEN,
   ITERATIONS,
   PARALLEL,
+  LOGGING,
 } = require(config)
 
 
@@ -33,6 +34,9 @@ let profiledRequest = (...args) => {
     .then(data => {
       let end = new Date();
       let duration = end.getTime() - start.getTime();
+      if (LOGGING) {
+      console.log(`${start.toISOString()}, ${end.toISOString()}, ${end.getTime() - start.getTime()}`);
+      }
       if (duration < min) {
         min = duration;
       }
@@ -44,6 +48,9 @@ let profiledRequest = (...args) => {
     })
     .catch(e => {
       errors.push(e);
+      if (LOGGING) {
+      console.log(ERROR, e);
+      }
     });
 };
 
